@@ -1,0 +1,5 @@
+venv/
+.env
+pilot/src/__pycache__/
+artifacts/
+.DS_Store
