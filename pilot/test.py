@@ -1,14 +1,22 @@
-The following are some of the advancements in AI language learning models (LLMs) as of 2024, with a focus on their impact on the field and the ethical considerations surrounding them:
+# Unit Tests
 
-1. Context-Aware Longformer Model: This model was introduced in 2024, which significantly improves the understanding and generation of long contexts without the need to slide the attention window.
-2. Universal Turing Machine Network (UTMN): The introduction of the UTMN marked a new era for AI LLMs. This model simulates the functionality of a universal Turing machine, allowing it to learn and generate sequences of symbols with complex structures, including natural language.
-3. Language Learning through Embodied Interaction: A novel approach called "Language Learning through Embodied Interaction" has been introduced in AI LLMs, where AI agents learn language by interacting with their environment and other agents in a more human-like manner.
-4. Long-term Memory Augmented Transformer (LMAT) Model: The "Long-term Memory Augmented Transformer" (LMAT) model has been developed, allowing AI LLMs to retain information for longer periods and improve their ability to reason and maintain conversations over extended periods.
-5. Cooperative Dialogue Model: A collaborative AI LLM named "Cooperative Dialogue Model" has been created, where multiple AI agents work together to generate coherent and contextually appropriate responses in a conversation.
-6. Multimodal AI LLMs: The development of the "Multimodal AI LLM" has allowed for better understanding and generation of language when combined with visual or auditory input, improving the overall performance of AI LLMs.
-7. Dynamic Attention Mechanism: The "Dynamic Attention Mechanism" has been implemented in several AI LLMs to improve their ability to focus on relevant parts of the input more effectively, resulting in better performance and efficiency.
-8. Ethical Implications of AI LLMs: Research is being conducted on the ethical implications of AI LLMs in decision-making processes, focusing on how to ensure fairness, accountability, and transparency in their actions.
-9. AI LLM Privacy Preservation Framework: The "AI LLM Privacy Preservation Framework" has been established, outlining guidelines for protecting the privacy of individuals during interactions with AI LLMs while still allowing for effective communication and understanding.
-10. AI LLM Hub: A new open-source platform called "AI LLM Hub" has been launched, providing researchers and developers with a centralized repository to share models, datasets, and research findings, fostering collaboration and advancements in the field of AI LLMs.
+import unittest
+from app import validate_user_input, check_user_db, return_signin_result
 
-In conclusion, these are some of the significant advancements in AI language learning models (LLMs) as of 2024, with a focus on their impact on the field and the ethical considerations surrounding them.
+class TestUserSignin(unittest.TestCase):
+
+    def test_valid_input(self):
+        # Test with valid input
+        self.assertEqual(return_signin_result(validate_user_input('john@test.com'), check_user_db('john@test.com')), "Sign-in successful")
+    
+    def test_invalid_input(self):  
+        # Test with invalid input
+        self.assertEqual(return_signin_result(validate_user_input('invalid'), check_user_db('invalid')), "Sign-in failed")
+
+# Integration Tests 
+
+# Test sign-in flow from view to database and back
+
+...
+
+# Implementation

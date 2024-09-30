@@ -1,5 +1,6 @@
 from crewai import Agent, Crew, Process, Task,LLM
 from crewai.project import CrewBase, agent, crew, task
+from anthropic import Anthropic
 import logging 
 
 # Uncomment the following line to use an example of a custom tool
@@ -7,7 +8,14 @@ import logging
 
 # Check our tools documentations for more information on how to use them
 # from crewai_tools import SerperDevTool
+anthropic = Anthropic()
 
+def anth_llm(**kwargs):
+    return anthropic.completions.create(
+        model="claude-3-sonnet-20240229",
+        max_tokens_to_sample=1000,
+        **kwargs
+    )
 @CrewBase
 class PilotCrew():
 	"""Pilot crew"""
@@ -18,47 +26,18 @@ class PilotCrew():
 	logging.info(f"LLM initialization with model :{chat_llm}, base url:{chat_llm.base_url}")
 
 	@agent
-	def researcher(self) -> Agent:
-		return Agent(
-			config=self.agents_config['researcher'],
-			llm=self.chat_llm,
-			# tools=[MyCustomTool()], # Example of custom tool, loaded on the beginning of file
-			verbose=True
-		)
-
-	@agent
-	def reporting_analyst(self) -> Agent:
-		return Agent(
-			config=self.agents_config['reporting_analyst'],
-			llm=self.chat_llm,
-			verbose=True
-		)
-
-	@agent
-	def principal_software_developer(self)-> Agent:
-		return Agent(config= self.agents_config['principal_software_developer'],
-			   llm=self.code_llm,
+	def software_developer(self)-> Agent:
+		return Agent(config= self.agents_config['software_developer'],
+			   llm='claude-2',
+			   allow_delegation=False,
 			   verbose=True
 			)
-
-	@task
-	def research_task(self) -> Task:
-		return Task(
-			config=self.tasks_config['research_task'],
-		)
-
-	@task
-	def reporting_task(self) -> Task:
-		return Task(
-			config=self.tasks_config['reporting_task'],
-			output_file='report.md'
-		)
 
 	@task
 	def development_task(self)-> Task:
 		return Task(
 			config=self.tasks_config['development_task'],
-			output_file='test.py'
+			output_file='test2.py'
 		)
 
 	@crew

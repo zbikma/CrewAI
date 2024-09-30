@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 import sys
+import os
+from dotenv import load_dotenv, find_dotenv
+#from pilot.crew import PilotCrew
 from pilot.crew import PilotCrew
 
 # This main file is intended to be a way for you to run your
@@ -7,15 +10,17 @@ from pilot.crew import PilotCrew
 # Replace with inputs you want to test with, it will automatically
 # interpolate any tasks and agents information
 
+
 def run():
     """
     Run the crew.
     """
+    load_dotenv()
     inputs = {
         'topic': 'AI LLMs',
         'stack':'Django',
         'language':'Python',
-        'feature':'Create a react component for sigining in using gmail'
+        'feature':'Implement an AWS lambda function to handle user log in'
 
     }
     PilotCrew().crew().kickoff(inputs=inputs)
